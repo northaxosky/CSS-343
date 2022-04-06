@@ -119,13 +119,22 @@ Poly& Poly::operator=(const Poly &poly) {
 // Overloaded == Operator
 // Checks if two polys are identical
 bool Poly::operator==(const Poly &poly) const   {
+    if (this->size != poly.size)    {
+        return false;
+    }
 
+    for (int i = 0; i < this->size; i++)    {
+        if (this->coEffPtr[i] != poly.coEffPtr[i])
+            return false;
+    }
+
+    return true;
 }
 
 // Overloaded != Operator
 // Checks if two polys contain any difference
 bool Poly::operator!=(const Poly &poly) const   {
-
+    return !(*this == poly);
 }
 
 // ====== Overloaded Mathematical Operators ======
