@@ -3,7 +3,7 @@
 // CSS 343 - Poly Assignment
 // Tests the functionality of the Poly class, extends upon the given lab1.cpp
 
-#include "Poly.cpp"
+#include "Poly.h"
 
 using namespace std;
 
