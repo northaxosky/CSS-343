@@ -53,7 +53,7 @@ public:
 
     // get and set for coefficient
     int getCo(int power) const;
-    void setCo(int co, int power);
+    void setCoeff(int co, int power);
 
 };
 

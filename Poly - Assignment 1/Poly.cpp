@@ -44,16 +44,14 @@ ostream &operator<<(ostream &out, const Poly &poly) {
 // Sets first input to co-efficient and next one to power
 istream &operator>>(istream &in, Poly &poly)    {
     int co, power;
-    bool valid = true;
 
-    while (valid)   {
+    while (true)   {
         in >> co >> power;
 
-        if (co == -1 && power == -1)    {
+        if (co == -1 && power == -1)    
             break;
-        }   else    {
-            poly.setCo(co, power);
-        }
+        
+        poly.setCoeff(co, power);
     }
 
     return in;
@@ -80,9 +78,14 @@ Poly::Poly(int co)  {
 // Co-eff & Power Constructor
 // Takes int co-efficient & int power and creates a Poly
 Poly::Poly(int co, int power)   {
-    this->size = power++;
+    this->size = power + 1;
     coEffPtr = new int[this->size];
-    coEffPtr[0] = co;
+    
+    for (int i = 0; i < this->size; i++)    {
+        this->coEffPtr[i] = 0;
+    }
+
+    this->coEffPtr[power] = co;
 }
 
 // Copy Constructor
@@ -158,7 +161,7 @@ Poly Poly::operator+(const Poly &poly) const   {
     if (this->size > poly.size) { // if the left polynomial is larger
         Poly sum(0, this->size);
 
-        for (int i = 0; this->size; i++)    {
+        for (int i = 0; i < this->size; i++)    {
             sum.coEffPtr[i] = this->coEffPtr[i];
 
             if (i < poly.size)  {
@@ -172,7 +175,7 @@ Poly Poly::operator+(const Poly &poly) const   {
     else    { // if the right polynomial is larger
         Poly sum(0, poly.size);
 
-        for (int i = 0; poly.size; i++) {
+        for (int i = 0; i < poly.size; i++) {
             sum.coEffPtr[i] = poly.coEffPtr[i];
 
             if (i < this->size) {
@@ -206,15 +209,16 @@ Poly Poly::operator-(const Poly &poly) const    {
         Poly result(0, poly.size);
 
         for (int i = 0; i < poly.size; i++) {
-            result.coEffPtr[i] = poly.coEffPtr[i];
-
             if (i < this->size) {
-                result.coEffPtr[i] -= poly.coEffPtr[i];
+                result.coEffPtr[i] = this->coEffPtr[i];
             }
+
+            result.coEffPtr[i] -= poly.coEffPtr[i];
         }
 
         return result;
     }
+
 }
 
 // Overloaded * Operator
@@ -270,7 +274,7 @@ int Poly::getCo(int power) const    {
 }
 
 // Sets co-efficient passed in to the power index of the array
-void Poly::setCo(int co, int power)  {
+void Poly::setCoeff(int co, int power)  {
     if (power >= 0) {
         if (power < this->size) this->coEffPtr[power] = co;
         else    {
