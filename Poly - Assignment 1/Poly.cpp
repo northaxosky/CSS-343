@@ -110,8 +110,20 @@ Poly& Poly::operator=(const Poly &poly) {
     if (this->coEffPtr == poly.coEffPtr)
         return *this;
 
-    this->coEffPtr = poly.coEffPtr;
-    this->size = poly.size;
+    if (this->size < poly.size) {
+        delete[] this->coEffPtr;
+        this->size = poly.size;
+        this->coEffPtr = new int[this->size];
+    }
+
+    for (int i = 0; i < this->size; i++)    {
+        this->coEffPtr[i] = 0;
+        if (i < poly.size)  {
+            this->coEffPtr[i] = poly.coEffPtr[i];
+        }
+    }
+
+    return *this;
 }
 
 // ====== Overloaded Comparison Operators ======
