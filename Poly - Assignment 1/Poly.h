@@ -4,7 +4,12 @@
 //
 // Implementation of polynomials
 
+#ifndef ASS1_POLY_H
+#define ASS1_POLY_H
+
 #include <iostream>
+
+using namespace std;
 
 class Poly  {
 private:
@@ -16,8 +21,8 @@ private:
     // Overloaded << and >> operators
     // << Displays the polynomial
     // >> Takes two ints for coeff and power and puts into array
-    friend std::ostream &operator<<(std::ostream &out, const Poly &poly);
-    friend std::istream &operator>>(std::istream &in, Poly &poly);
+    friend ostream &operator<<(ostream &out, const Poly &poly);
+    friend istream &operator>>(istream &in, Poly &poly);
 
 public:
     // Constructors
@@ -51,3 +56,5 @@ public:
     void setCo(int co, int power);
 
 };
+
+#endif // ASS1_POLY_H

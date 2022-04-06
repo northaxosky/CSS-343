@@ -43,17 +43,17 @@ ostream &operator<<(ostream &out, const Poly &poly) {
 // Overloaded >> operator
 // Sets first input to co-efficient and next one to power
 istream &operator>>(istream &in, Poly &poly)    {
-    int co;
-    int power;
-    bool valid;
+    int co, power;
+    bool valid = true;
 
     while (valid)   {
         in >> co >> power;
 
-        if (co == -1 && power == -1)
+        if (co == -1 && power == -1)    {
             break;
-
-        poly.setCo(co, power);
+        }   else    {
+            poly.setCo(co, power);
+        }
     }
 
     return in;
