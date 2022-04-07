@@ -16,15 +16,11 @@ int main() {
 	// B = +3x^4 +1x^3 
 	cout << "Enter terms for polynomial A.  Enter a coefficient " << endl
 		<< "then exponent for each term. Enter -1 -1 to terminate." << endl;
-	// cin >> A                            // or use a bunch of setCoeff	
-	A.setCoeff(-4, 3);
-	A.setCoeff(10, 1); 
-	A.setCoeff(-2, 0);
+	cin >> A;                            // or use a bunch of setCoeff	
+
 	cout << "Enter terms for polynomial B.  Enter a coefficient " << endl
 		<< "then exponent for each term. Enter -1 -1 to terminate." << endl;
-	// cin >> B;                                     // or use a bunch of setCoeff
-	B.setCoeff(3, 4);
-	B.setCoeff(1, 3);
+	cin >> B;                            // or use a bunch of setCoeff
 	
 	// outputs exactly what is in quotes: "A = +5x^7 -4x^3 +10x -2"
 	cout << "A =" << A << endl;
