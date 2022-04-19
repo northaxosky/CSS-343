@@ -26,6 +26,25 @@ public:
     int getHeight(const NodeData &data) const;
     void bstreeToArray(NodeData* arr[]);
     void arrayToBSTree(NodeData* arr[]);
+
+private:
+    // Node Structure for data
+    struct Node {
+        NodeData* data;
+        Node* left;
+        Node* right;
+    };
+
+    // Root Node
+    Node* root;
+
+    // Private Helper Functions
+    void printHelper(const Node* node) const;
+    void destructorHelper(Node* node);
+    void copyHelper(Node* left, Node* right);
+    bool equalityHelper(Node* left, Node* right) const;  
+    void retrieveHelper(Node* node, const NodeData &data, NodeData* &ptr);
+    int heightHelper(Node* node, const NodeData &data) const;
 };
 
 #endif
