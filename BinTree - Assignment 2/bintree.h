@@ -26,6 +26,9 @@ public:
     int getHeight(const NodeData &data) const;
     void bstreeToArray(NodeData* arr[]);
     void arrayToBSTree(NodeData* arr[]);
+    void displaySideways() const;
+    void makeEmpty();
+    bool insert(NodeData* data);
 
 private:
     // Node Structure for data
@@ -45,6 +48,7 @@ private:
     bool equalityHelper(Node* left, Node* right) const;  
     void retrieveHelper(Node* node, const NodeData &data, NodeData* &ptr);
     int heightHelper(Node* node, const NodeData &data) const;
+    void sideways(Node* node, int level) const;
 };
 
 #endif
