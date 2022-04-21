@@ -56,9 +56,17 @@ int BinTree::getHeight(const NodeData &data) const  {
     return heightHelper(this->root, data);
 }
 
-void bstreeToArray(NodeData* arr[]) {}
+void BinTree::bstreeToArray(NodeData* arr[]) {}
 
-void arrayToBSTree(NodeData* arr[]) {}
+void BinTree::arrayToBSTree(NodeData* arr[]) {}
+
+void BinTree::displaySideways() const   {
+    sideways(root, 0);
+}
+
+void BinTree::makeEmpty()   {}
+
+bool BinTree::insert(NodeData* data)    {}
 
 // Private Helper Functions
 
@@ -113,5 +121,23 @@ void BinTree::retrieveHelper(Node* node, const NodeData &data, NodeData* &ptr)  
 }
 
 int BinTree::heightHelper(Node* node, const NodeData &data) const   {
+    if (node == nullptr)    return 0;
+    if (*node->data == data)    return 1 + max(heightHelper(node->left, data), heightHelper(node->right, data));
+ 
 
+}
+
+void BinTree::sideways(Node* node, int level) const  {
+    if (node != NULL) {
+		level++;
+		sideways(node->right, level);
+
+		// indent for readability, 4 spaces per depth level 
+		for (int i = level; i >= 0; i--) {
+			cout << "    ";
+		}
+
+		cout << *node->data << endl;        // display information of object
+		sideways(node->left, level);
+	}
 }
