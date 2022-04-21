@@ -1,4 +1,2 @@
-1. bstreeToArray
-2. arrayToBSTree
 3. getHeight???
 4. test

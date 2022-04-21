@@ -57,14 +57,26 @@ int BinTree::getHeight(const NodeData &data) const  {
 }
 
 void BinTree::bstreeToArray(NodeData* arr[]) {
-
+    int i = 0;
+    bstreeToArrayHelper(root, arr, i);
     destructorHelper(root);
 }
 
 void BinTree::arrayToBSTree(NodeData* arr[]) {
     destructorHelper(root);
 
+    int size = 0;
+    for (int i = 0; i < 100; i++)   {
+        if (arr[i] != nullptr)  {
+            size++;
+        }
+        else    {
+            break;
+        }
+    }
+    size--;
 
+    arrayToBSTreeHelper(root, arr, 0, size);
 }
 
 void BinTree::displaySideways() const   {
@@ -161,7 +173,38 @@ bool BinTree::insertHelper(Node* node, NodeData* data)  {
         node->right = nullptr;
         return true;
     }
+
     if (*data < *node->data) return insertHelper(node->left, data);
     if (*data > *node->data) return insertHelper(node->right, data);
     if (*data == *node->data) return false;
+}
+
+void BinTree::bstreeToArrayHelper(Node* node, NodeData* arr[], int &i)  {
+    if (node == nullptr)    {
+        return;
+    }
+
+    if (node->left != nullptr)  {
+        bstreeToArrayHelper(node->left, arr, i);
+    }
+
+    arr[i] = node->data;
+    i++;
+
+    if (node->right != nullptr) {
+        bstreeToArrayHelper(node->right, arr, i);
+    }
+}
+
+void BinTree::arrayToBSTreeHelper(Node* node, NodeData* arr[], int start, int end)   {
+    if (start > end)    {
+        node = nullptr;
+        return;
+    }
+    int midpoint = (start + end) / 2;
+    NodeData* data = arr[midpoint];
+    arr[midpoint] = nullptr;
+    insert(data);
+    arrayToBSTreeHelper(node, arr, start, (midpoint - 1));
+    arrayToBSTreeHelper(node, arr, (midpoint + 1), end);
 }

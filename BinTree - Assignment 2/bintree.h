@@ -1,9 +1,10 @@
 #ifndef BINTREE_H
 #define BINTREE_H
+
+#include "nodedata.h"
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <nodedata.h>
 
 using namespace std;
 
@@ -50,6 +51,8 @@ private:
     int heightHelper(Node* node, const NodeData &data) const;
     void sideways(Node* node, int level) const;
     bool insertHelper(Node* node, NodeData* data);
+    void bstreeToArrayHelper(Node* node, NodeData* arr[], int &i);
+    void arrayToBSTreeHelper(Node* node, NodeData* arr[], int start, int end);
 };
 
 #endif
