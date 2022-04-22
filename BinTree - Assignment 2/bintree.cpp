@@ -88,7 +88,17 @@ void BinTree::makeEmpty()   {
 }
 
 bool BinTree::insert(NodeData* data)    {
-    return insertHelper(this->root, data);
+    if (root == nullptr)    {
+        root = new Node;
+        root->data = data;
+        root->left = nullptr;
+        root->right = nullptr;
+        data = nullptr;
+        return true;
+    }
+
+    Node* node = insertHelper(this->root, data);
+    return (node != nullptr);
 }
 
 // Private Helper Functions
@@ -164,20 +174,24 @@ void BinTree::sideways(Node* node, int level) const  {
 	}
 }
 
-bool BinTree::insertHelper(Node* node, NodeData* data)  {
+BinTree::Node* BinTree::insertHelper(Node* node, NodeData* data)    {
     if (node == nullptr)    {
-        node = new Node;
-        node->data = data;
-        node->left = nullptr;
-        node->right = nullptr;
-        root = node;
-        return true;
+        auto* temp = new Node;
+        temp->left = nullptr;
+        temp->right = nullptr;
+        temp->data = data;
+        data = nullptr;
+        node = temp;
+        return node;
     }
-
-    if (*data < *node->data) return insertHelper(node->left, data);
-    if (*data > *node->data) return insertHelper(node->right, data);
-    if (*data == *node->data) return false;
-    return true;
+    if (*data < *node->data) 
+        node->left = insertHelper(node->left, data);
+    else if (*data == *node->data)
+        return nullptr;
+    else
+        node->right = insertHelper(node->right, data);
+    
+    return node;
 }
 
 void BinTree::bstreeToArrayHelper(Node* node, NodeData* arr[], int &i)  {
