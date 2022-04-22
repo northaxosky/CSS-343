@@ -106,7 +106,7 @@ bool BinTree::insert(NodeData* data)    {
 void BinTree::printHelper(const Node* node) const   {
     if (node != nullptr)    {
         printHelper(node->left);
-        cout << node->data << " ";
+        cout << *node->data << " ";
         printHelper(node->right);
     }
 }
