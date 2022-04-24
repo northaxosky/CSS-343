@@ -1,3 +1,23 @@
+// BinTree.h
+// By Kuzey Gok
+// Simple class for a Binary Search Tree that sores NodeData as data
+//
+// Description of Class BinTree
+// =========================================================================
+// Has two constructors, one which takes another tree, and a destructor
+// Can display the tree sideways or inorder by using the << operator
+// Can retrieve a node and its data, get Height of a node, convert to and
+// from an array, be emptied, and insert new nodes.
+//
+// Properties of Class BinTree
+// =========================================================================
+// Has a Node Struct that is used to store and traverse the tree which only
+// the tree can create.
+// Has only one private field which is the root of the node 
+// Overloaded operators include: =, ==, !=
+// Has multiple private helper functions to recursively implement the
+// functionality from above.
+
 #ifndef BINTREE_H
 #define BINTREE_H
 
