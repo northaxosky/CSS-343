@@ -8,6 +8,6 @@ Tests (2 * 20% Each) - 40%
 Discussion & Participation - 10%
 
 ## Compile and Valgrind
-g++ -g -std=c++11 -Wall -Wextra -Wno-sign-compare *.cpp
+g++ -g -std=c++11 -Wall -Wextra -Wno-sign-compare *.cpp   
 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./a.out
  (--verbose --log-file=valgrind-out.txt)
