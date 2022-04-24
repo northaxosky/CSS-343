@@ -24,7 +24,7 @@ public:
 
     // Other Functions
     bool retrieve(const NodeData &data, NodeData* &ptr);
-    int getHeight(const NodeData &data) const;
+    int getHeight(const NodeData &data);
     void bstreeToArray(NodeData* arr[]);
     void arrayToBSTree(NodeData* arr[]);
     void displaySideways() const;
@@ -45,10 +45,10 @@ private:
     // Private Helper Functions
     void printHelper(const Node* node) const;
     void destructorHelper(Node* node);
-    void copyHelper(Node* left, Node* right);
+    void copyHelper(Node* right);
     bool equalityHelper(Node* left, Node* right) const;  
-    void retrieveHelper(Node* node, const NodeData &data, NodeData* &ptr);
-    int heightHelper(Node* node, const NodeData &data) const;
+    Node* retrieveHelper(Node* node, const NodeData &data, NodeData* &ptr);
+    int heightHelper(Node* node) const;
     void sideways(Node* node, int level) const;
     Node* insertHelper(Node* node, NodeData* data);
     void bstreeToArrayHelper(Node* node, NodeData* arr[], int &i);

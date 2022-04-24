@@ -70,7 +70,7 @@ int main() {
 		cout << "Height    --> ooo:  " << T.getHeight(oooND) << endl;
 		cout << "Height    --> y:  " << T.getHeight(yND) << endl;
 
-		// test ==, and != 
+		// test ==, and !=
 		T2 = T;
 		cout << "T == T2?     " << (T == T2 ? "equal" : "not equal") << endl;
 		cout << "T != first?  " << (T != first ? "not equal" : "equal") << endl;

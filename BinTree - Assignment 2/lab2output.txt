@@ -1,7 +1,7 @@
 Initial data:
   iii not tttt eee r not and jj r eee pp r sssss eee not tttt ooo ff m m y z $$ 
 Tree Inorder:
-and eee ff iii jj m not ooo pp r sssss tttt y z (and m pp r )
+and eee ff iii jj m not ooo pp r sssss tttt y z
                         z
                     y
                 tttt
