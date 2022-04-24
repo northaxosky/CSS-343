@@ -1,8 +1,8 @@
 Written in latest Version of C++
 Used Visual Studio Code C++ extension
 Compiled using 'g++ -g -std=c++11 -Wall -Wextra -Wno-sign-compare *.cpp' in the console.
-Produced the correct output for lab1 on linux machine and local machine.
-Produced no memory leaks from lab1's main.
+Produced the correct output for lab2 on linux machine and local machine.
+Produced no memory leaks from lab2's main.
 Checked for memory leaks using valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./a.out
 
 // CONCERNING int getHeight() //
