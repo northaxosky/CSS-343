@@ -198,18 +198,11 @@ BinTree::Node* BinTree::insertHelper(Node* node, NodeData* data)    {
 }
 
 void BinTree::bstreeToArrayHelper(Node* node, NodeData* arr[], int &i)  {
-    if (node == nullptr)    {
-        return;
-    }
-
-    if (node->left != nullptr)  {
+    if (node)   {
         bstreeToArrayHelper(node->left, arr, i);
-    }
-
-    arr[i] = node->data;
-    i++;
-
-    if (node->right != nullptr) {
+        arr[i] = node->data;
+        node->data = nullptr;
+        i++;
         bstreeToArrayHelper(node->right, arr, i);
     }
 }
