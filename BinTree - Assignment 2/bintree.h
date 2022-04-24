@@ -50,7 +50,7 @@ private:
     Node* retrieveHelper(Node* node, const NodeData &data, NodeData* &ptr);
     int heightHelper(Node* node) const;
     void sideways(Node* node, int level) const;
-    Node* insertHelper(Node* node, NodeData* data);
+    Node* insertHelper(Node* node, NodeData* data, bool &exists);
     void bstreeToArrayHelper(Node* node, NodeData* arr[], int &i);
     void arrayToBSTreeHelper(Node* node, NodeData* arr[], int start, int end);
 };

@@ -93,9 +93,10 @@ bool BinTree::insert(NodeData* data)    {
         data = nullptr;
         return true;
     }
+    bool exists = false;
 
-    Node* node = insertHelper(this->root, data);
-    return (node != nullptr);
+    insertHelper(this->root, data, exists);
+    return !exists;
 }
 
 // Private Helper Functions
@@ -113,8 +114,10 @@ void BinTree::destructorHelper(Node* node) {
         destructorHelper(node->left);
         destructorHelper(node->right);
 
-        delete node->data;
-        node->data = nullptr;
+        if (node->data) {
+            delete node->data;
+            node->data = nullptr;
+        }
         delete node;
         node = nullptr;      
     }
@@ -124,7 +127,8 @@ void BinTree::destructorHelper(Node* node) {
 
 void BinTree::copyHelper(Node* right)   {
     if (right)  {
-        insert(right->data);
+        NodeData* data = new NodeData(*right->data);
+        insert(data);
         copyHelper(right->left);
         copyHelper(right->right);
     }
@@ -177,7 +181,7 @@ void BinTree::sideways(Node* node, int level) const  {
 	}
 }
 
-BinTree::Node* BinTree::insertHelper(Node* node, NodeData* data)    {
+BinTree::Node* BinTree::insertHelper(Node* node, NodeData* data, bool &exists)    {
     if (node == nullptr)    {
         auto* temp = new Node;
         temp->left = nullptr;
@@ -188,11 +192,13 @@ BinTree::Node* BinTree::insertHelper(Node* node, NodeData* data)    {
         return node;
     }
     if (*data < *node->data) 
-        node->left = insertHelper(node->left, data);
-    else if (*data == *node->data)
+        node->left = insertHelper(node->left, data, exists);
+    else if (*data == *node->data)  {
+        exists = true;
         return node;
+    }
     else
-        node->right = insertHelper(node->right, data);
+        node->right = insertHelper(node->right, data, exists);
     
     return node;
 }
