@@ -187,7 +187,7 @@ BinTree::Node* BinTree::insertHelper(Node* node, NodeData* data)    {
     if (*data < *node->data) 
         node->left = insertHelper(node->left, data);
     else if (*data == *node->data)
-        return nullptr;
+        return node;
     else
         node->right = insertHelper(node->right, data);
     
