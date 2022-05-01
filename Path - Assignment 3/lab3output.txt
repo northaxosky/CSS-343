@@ -1,0 +1,89 @@
+Description         From node   To node   Dijkstra's     Path      
+Aurora and 85th
+                        1         2        40            1 3 2
+                        1         3        20            1 3
+                        1         4        50            1 3 2 4
+                        1         5        30            1 5
+Green Lake Starbucks
+                        2         1      ----
+                        2         3      ----
+                        2         4        10            2 4
+                        2         5      ----
+Woodland Park Zoo
+                        3         1      ----
+                        3         2        20            3 2
+                        3         4        30            3 2 4
+                        3         5      ----
+Troll under bridge
+                        4         1      ----
+                        4         2      ----
+                        4         3      ----
+                        4         5      ----
+PCC
+                        5         1      ----
+                        5         2        20            5 2
+                        5         3      ----
+                        5         4        25            5 4
+
+    3         1      ----
+
+    1         2        40            1 3 2
+Aurora and 85th
+Woodland Park Zoo
+Green Lake Starbucks
+
+    1         4        50            1 3 2 4
+Aurora and 85th
+Woodland Park Zoo
+Green Lake Starbucks
+Troll under bridge
+
+Description         From node   To node   Dijkstra's     Path      
+aaa
+                        1         2         9            1 3 2
+                        1         3         5            1 3
+bbb
+                        2         1      ----
+                        2         3        20            2 3
+ccc
+                        3         1      ----
+                        3         2         4            3 2
+
+    3         1      ----
+
+    1         2         9            1 3 2
+aaa
+ccc
+bbb
+
+    1         4      ----
+
+Graph:
+Node1         Aurora and 85th
+  edge  1  2
+  edge  1  3
+  edge  1  5
+Node2         Green Lake Starbucks
+  edge  2  4
+Node3         Woodland Park Zoo
+  edge  3  2
+  edge  3  4
+Node4         Troll under bridge
+Node5         PCC
+  edge  5  2
+  edge  5  4
+
+Depth-fisrt ordering:  1  2  4  3  5
+
+Graph:
+Node1         aaa
+  edge  1  3
+  edge  1  2
+Node2         bbb
+  edge  2  3
+Node3         ccc
+  edge  3  2
+
+Depth-fisrt ordering:  1  3  2
+
+
