@@ -7,6 +7,12 @@ using namespace std;
 
 const int MAXNODES = 100;
 
+struct TableType    {
+    bool visited;
+    int dist;
+    int path;
+};
+
 class GraphM    {
 public:
     // Constructor
@@ -24,14 +30,6 @@ private:
     int C[MAXNODES][MAXNODES];
     int size;
     TableType T[MAXNODES][MAXNODES];
-
-
-};
-
-struct TableType    {
-    bool visited;
-    int dist;
-    int path;
 };
 
 #endif
