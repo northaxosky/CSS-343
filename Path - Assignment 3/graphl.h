@@ -27,15 +27,12 @@ public:
     void depthFirstSearch();
     void displayGraph();
 
-    // Helper Functions
-    void DFSHelper(int idx);
-
 private:
     int size;
     GraphNode nodes[MAXNODES];
 
-    void empty();
-    void DFSHelper(int n);
+    // Helper Function
+    void DFSHelper(int idx);
 };
 
 #endif

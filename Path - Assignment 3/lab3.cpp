@@ -21,7 +21,7 @@ using namespace std;
 int main() {
 	
 	// part 1
-	ifstream infile1("data31.txt");
+	ifstream infile1("dataUWB.txt");
 	if (!infile1) {
 		cout << "File could not be opened." << endl;
 		return 1;

@@ -24,15 +24,18 @@ public:
     void display(int from, int to);
     void displayAll();
 
-    // Helper Functions
-    void dijkstras(int source);
-    int findMinimum(int source);
     
 private:
     NodeData data[MAXNODES];            // data for graph nodes
     int C[MAXNODES][MAXNODES];          // Cost array, the adjacency matrix
     int size;                           // number of nodes in the graph
     TableType T[MAXNODES][MAXNODES];    // stores visited, distance, path
+
+    // Helper Functions
+    int dijkstras(int source);
+    int findMinimum(int source);
+    void path(int from, int to);
+    void info(int from, int to);
 };
 
 #endif

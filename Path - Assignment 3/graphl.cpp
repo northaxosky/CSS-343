@@ -14,7 +14,7 @@ GraphL::GraphL()    {
 // Destructor
 // ===================================================================
 GraphL::~GraphL()   {
-    for (int i = 0; i <= size; i++) {
+    for (int i = 1; i <= size; i++) {
         delete nodes[i].data;
         nodes[i].data = nullptr;
         nodes[i].visited = false;
@@ -38,8 +38,8 @@ void GraphL::buildGraph(ifstream& file) {
 
     for (int i = 1; i <= size; i++) {
         getline(file, str);
-        NodeData* data = new NodeData(str);
-        nodes[i].data = data;
+        NodeData* temp = new NodeData(str);
+        nodes[i].data = temp;
     }
 
     while (file >> from >> to)  {
@@ -53,8 +53,10 @@ void GraphL::buildGraph(ifstream& file) {
             node->nextEdge = nodes[from].edgeHead;
             nodes[from].edgeHead = node;
         }  
-        else    
+        else    {
             nodes[from].edgeHead = node; 
+            nodes[from].edgeHead->nextEdge = nullptr;
+        }
     }
 }
 

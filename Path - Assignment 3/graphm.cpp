@@ -6,6 +6,7 @@
 // using Dijkstra's shortest path algorithm.
 // ========================================================
 #include "graphm.h"
+#include <iomanip>
 
 // Constructor for GraphM
 //=========================================================
@@ -13,6 +14,7 @@ GraphM::GraphM()    {
     size = 0;
     for (int i = 1; i < MAXNODES; i++)  {
         for (int j = 1; j < MAXNODES; j++)  {
+            C[i][j] = INT_MAX;
             T[i][j].dist = INT_MAX;
             T[i][j].path = 0;
             T[i][j].visited = false;
@@ -35,58 +37,53 @@ void GraphM::buildGraph(ifstream& file) {
     while(file >> from >> to >> dist)   {
         if (from == 0 && to == 0 && dist == 0)
             break;
-        
+
         C[from][to] = dist;
-    } 
+    }
 }
 
 // findShortestPath function to find the shortest path from
 // a node to every node using Djikstra's Shortest Path Algo
 //=========================================================
 void GraphM::findShortestPath() {
-    for (int source = 1; source <= size; source++) {
+    for (int source = 1; source <= size; source++)  {
         T[source][source].dist = 0;
         T[source][source].visited = true;
-        
-        for (int i = 0; i <= size; i++) {
-            if (C[source][i] != INT_MAX)    {
-                T[source][i].dist = C[source][i];
-                T[source][i].path = source;
+
+        for (int j = 1; j <= size; j++) {
+            if (C[source][j] != INT_MAX)   {
+                T[source][j].dist = C[source][j];
+                T[source][j].path = source;
             }
         }
-        dijkstras(source);
+        int min = -1;
+        while (min != 0)    {
+            min = dijkstras(source);
+        }
     }
-
-        // finds the shortest distance from source to all other nodes
-        // for (int i = 1; i<= size; i++) {
-        //     find v //not visited, shortest distance at this point
-        //     mark v visited  
-        //     for each w adjacent to v
-        //     if (w is not visited)
-        //         T[source][w].dist=min(T[source][w].dist, T[source][v].dist+C[V][W]) 
-        // }
 }
 
 // Helper function for findShortestPath
 //=========================================================
-void GraphM::dijkstras(int source)  {
+int GraphM::dijkstras(int source)  {
     int min = findMinimum(source);
     if (min == 0)
-        return;
-    
+        return min;
+
     T[source][min].visited = true;
-    for (int i = 1; i <= size; i++)  {
+    for (int i = 1; i <= size; ++i)  {
         if (T[source][i].visited ||
             C[min][i] == INT_MAX ||
             min == i)
                 continue;
 
-        int compare = T[source][min].dist + C[min][i];
-        if (T[source][i].dist > compare)    {
-            T[source][i].dist = compare;
+        if (T[source][i].dist > T[source][min].dist + C[min][i])    {
+            T[source][i].dist = T[source][min].dist + C[min][i];
             T[source][i].path = min;
-        }    
+        }
     }
+
+    return min;
 }
 
 // Helper function for findShortestPath
@@ -96,8 +93,8 @@ int GraphM::findMinimum(int source)    {
     int idx = 0;
 
     for (int i = 1; i <= size; i++) {
-        if (!T[source][i].visited && T[source][i].dist <= min)  {
-            min = T[source][i].dist;
+        if (!T[source][i].visited && C[source][i] < min)    {
+            min = C[source][i];
             idx = i;
         }
     }
@@ -112,27 +109,91 @@ bool GraphM::insertEdge(int from, int to, int dist) {
        from > size || to > size ||
        from < 1 || to < 1)
         return false;
-    
+
     C[from][to] = dist;
     return true;
 }
 
+// Function to remove an edge given its start and end
 //=========================================================
 bool GraphM::removeEdge(int from, int to)   {
     if (to > size || to < 1 ||
         from > size || from < 1)
             return false;
-    
+
     C[from][to] = INT_MAX;
     return true;
 }
 
+// Function to display shortest distance from node to another
 //=========================================================
 void GraphM::display(int from, int to)  {
-
+    if (from > size || from < 0 ||
+        to > size || to < 0)    {
+            cout << from << "         " <<
+            to  << "      ----" << endl;
+    }
+    else    {
+        cout << "       " << from << "       " << to;
+        if (T[from][to].dist == INT_MAX)
+            cout << "     ----" << endl;
+        else    {
+            cout << "         " << T[from][to].dist << "         ";
+            path(from, to);
+            cout << endl;
+            info(from, to);
+        }
+    }
+    cout << endl;
 }
 
+// Function to display shortest path of all nodes
 //=========================================================
 void GraphM::displayAll()   {
+    cout << "Description:        " << "From Node:  " <<
+    "To Node:  " << "Dijkstra's:    " << "Path" << endl;
 
+    for (int i = 1; i <= size; i++) {
+        cout << data[i] << "\n\n";
+
+        for (int j = 1; j <= size; j++) {
+            if (T[i][j].dist != 0)    {
+                cout << "                        " << i
+                << "         " << j;
+
+                if (T[i][j].dist != INT_MAX)   {
+                    cout << "        " << T[i][j].dist
+                    << "            ";
+
+                    path(i, j);
+                    cout << endl;
+                }
+                else
+                    cout << "        " << "----" << endl;
+            }
+        }
+    }
+}
+
+// Helper function to print the shortest path from a node to another
+//=========================================================
+void GraphM::path(int from, int to) {
+    if (from == to) 
+        cout << to << " ";
+    else    {
+        int n = to;
+        path(from, to = T[from][to].path);
+        cout << n << " ";
+    } 
+}
+
+void GraphM::info(int from, int to) {
+    if (from == to)  {
+        cout << data[to] << endl;
+    }
+    else    {
+        int n = to;
+        info(from, to = T[from][to].path);
+        cout << data[n] << endl << endl;
+    }
 }
