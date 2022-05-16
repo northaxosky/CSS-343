@@ -48,19 +48,44 @@ void GraphM::buildGraph(ifstream& file) {
 void GraphM::findShortestPath() {
     for (int source = 1; source <= size; source++)  {
         T[source][source].dist = 0;
-        T[source][source].visited = true;
+        for (int i = 1; i <= size; i++) {
+            int step = 0;
+            int path = INT_MAX;
+            for (int j = 1; j <= size; j++) {
+                if (T[source][j].dist < path && !T[source][j].visited)  {
+                    path = T[source][j].dist;
+                    step = j;
+                    T[source][step].visited = true;
+                }
+            }
 
-        for (int j = 1; j <= size; j++) {
-            if (C[source][j] != INT_MAX)   {
-                T[source][j].dist = C[source][j];
-                T[source][j].path = source;
+            if (step == 0)
+                break;
+
+            for (int j = 1; j <= size; j++) {
+                if (C[step][j] != INT_MAX  &&
+                    T[source][j].dist > T[source][step].dist + C[step][j]) {
+                        T[source][j].dist = T[source][step].dist + C[step][j];
+                        T[source][j].path = step;
+                }
             }
         }
-        int min = -1;
-        while (min != 0)    {
-            min = dijkstras(source);
-        }
     }
+    // for (int source = 1; source <= size; source++)  {
+    //     T[source][source].dist = 0;
+    //     T[source][source].visited = true;
+
+    //     for (int j = 1; j <= size; j++) {
+    //         if (C[source][j] != INT_MAX)   {
+    //             T[source][j].dist = C[source][j];
+    //             T[source][j].path = source;
+    //         }
+    //     }
+    //     int min = -1;
+    //     while (min != 0)    {
+    //         min = dijkstras(source);
+    //     }
+    // }
 }
 
 // Helper function for findShortestPath
@@ -111,6 +136,7 @@ bool GraphM::insertEdge(int from, int to, int dist) {
         return false;
 
     C[from][to] = dist;
+    findShortestPath();
     return true;
 }
 
@@ -122,6 +148,7 @@ bool GraphM::removeEdge(int from, int to)   {
             return false;
 
     C[from][to] = INT_MAX;
+    findShortestPath();
     return true;
 }
 
