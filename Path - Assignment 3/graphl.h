@@ -3,6 +3,7 @@
 #include "nodedata.h"
 #include <iostream>
 #include <fstream>
+#include <climits>
 using namespace std;
 
 const int MAXNODES = 100;
