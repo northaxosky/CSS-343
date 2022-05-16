@@ -1,5 +1,7 @@
 #include "graphl.h"
 
+// Constructor
+// ===================================================================
 GraphL::GraphL()    {
     size = 0;
     for (int i = 1; i < MAXNODES; i++)  {
@@ -9,6 +11,8 @@ GraphL::GraphL()    {
     }
 }
 
+// Destructor
+// ===================================================================
 GraphL::~GraphL()   {
     for (int i = 0; i <= size; i++) {
         delete nodes[i].data;
@@ -24,6 +28,8 @@ GraphL::~GraphL()   {
     }
 }
 
+// Function to build a graph using data from a file
+// ===================================================================
 void GraphL::buildGraph(ifstream& file) {
     int from, to;
     file >> size;
@@ -49,5 +55,50 @@ void GraphL::buildGraph(ifstream& file) {
         }  
         else    
             nodes[from].edgeHead = node; 
+    }
+}
+
+// Function to do depthFirstSearh and display ordering
+// ===================================================================
+void GraphL::depthFirstSearch() {
+    cout << "Depth-First Search Ordering: ";
+
+    for (int i = 1; i <= size; i++) {
+        if (!nodes[i].visited)
+            DFSHelper(i);
+    }
+    cout << endl;
+}
+
+// Function to display the graph
+// ===================================================================
+void GraphL::displayGraph() {
+    cout << "Graph: " << endl;
+
+    for (int i = 1; i <= size; i++) {
+        cout << "Node #" << i << "\t\t" << *nodes[i].data << "\n\n";
+
+        EdgeNode* curr = nodes[i].edgeHead;
+        while (curr)    {
+            cout << "  " << "Edge  " << i << "  " << curr->adjGraphNode << endl;
+            curr = curr->nextEdge;
+        }
+        cout << endl; 
+    }
+}
+
+
+// Helper Function for depth first search
+// ===================================================================
+void GraphL::DFSHelper(int idx) {
+    cout << "  " << idx;
+    nodes[idx].visited = true;
+    EdgeNode* curr = nodes[idx].edgeHead;
+
+    while (curr)    {
+        if (!nodes[curr->adjGraphNode].visited)
+            DFSHelper(curr->adjGraphNode);
+        
+        curr = curr->nextEdge;
     }
 }
