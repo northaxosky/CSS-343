@@ -32,10 +32,11 @@ private:
     TableType T[MAXNODES][MAXNODES];    // stores visited, distance, path
 
     // Helper Functions
-    int dijkstras(int source);
-    int findMinimum(int source);
-    void path(int from, int to);
-    void info(int from, int to);
+    int visit(int source);
+    void path(int source, int v);
+    void displayFrom(int from);
+    void descending(int from, int to);
+    void displayPath(int from, int to);
 };
 
 #endif
