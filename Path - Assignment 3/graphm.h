@@ -1,11 +1,10 @@
 #ifndef GRAPHM_H
 #define GRAPHM_H
 #include "nodedata.h"
+#include "graphl.h"
 #include <iostream>
 #include <fstream>
 using namespace std;
-
-const int MAXNODES = 100;
 
 struct TableType    {
     bool visited;
@@ -24,12 +23,16 @@ public:
     bool removeEdge(int from, int to);
     void display(int from, int to);
     void displayAll();
+
+    // Helper Functions
+    void dijkstras(int source);
+    int findMinimum(int source);
     
 private:
-    NodeData data[MAXNODES];
-    int C[MAXNODES][MAXNODES];
-    int size;
-    TableType T[MAXNODES][MAXNODES];
+    NodeData data[MAXNODES];            // data for graph nodes
+    int C[MAXNODES][MAXNODES];          // Cost array, the adjacency matrix
+    int size;                           // number of nodes in the graph
+    TableType T[MAXNODES][MAXNODES];    // stores visited, distance, path
 };
 
 #endif

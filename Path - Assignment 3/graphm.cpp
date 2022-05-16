@@ -40,11 +40,71 @@ void GraphM::buildGraph(ifstream& file) {
     } 
 }
 
+// findShortestPath function to find the shortest path from
+// a node to every node using Djikstra's Shortest Path Algo
 //=========================================================
 void GraphM::findShortestPath() {
+    for (int source = 1; source <= size; source++) {
+        T[source][source].dist = 0;
+        T[source][source].visited = true;
+        
+        for (int i = 0; i <= size; i++) {
+            if (C[source][i] != INT_MAX)    {
+                T[source][i].dist = C[source][i];
+                T[source][i].path = source;
+            }
+        }
+        dijkstras(source);
+    }
 
+        // finds the shortest distance from source to all other nodes
+        // for (int i = 1; i<= size; i++) {
+        //     find v //not visited, shortest distance at this point
+        //     mark v visited  
+        //     for each w adjacent to v
+        //     if (w is not visited)
+        //         T[source][w].dist=min(T[source][w].dist, T[source][v].dist+C[V][W]) 
+        // }
 }
 
+// Helper function for findShortestPath
+//=========================================================
+void GraphM::dijkstras(int source)  {
+    int min = findMinimum(source);
+    if (min == 0)
+        return;
+    
+    T[source][min].visited = true;
+    for (int i = 1; i <= size; i++)  {
+        if (T[source][i].visited ||
+            C[min][i] == INT_MAX ||
+            min == i)
+                continue;
+
+        int compare = T[source][min].dist + C[min][i];
+        if (T[source][i].dist > compare)    {
+            T[source][i].dist = compare;
+            T[source][i].path = min;
+        }    
+    }
+}
+
+// Helper function for findShortestPath
+//=========================================================
+int GraphM::findMinimum(int source)    {
+    int min = INT_MAX;
+    int idx = 0;
+
+    for (int i = 1; i <= size; i++) {
+        if (!T[source][i].visited && T[source][i].dist <= min)  {
+            min = T[source][i].dist;
+            idx = i;
+        }
+    }
+    return idx;
+}
+
+// Function to insert edge given its vertices and val
 //=========================================================
 bool GraphM::insertEdge(int from, int to, int dist) {
     if (dist < 0 ||
