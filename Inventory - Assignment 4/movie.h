@@ -1,3 +1,11 @@
+// Kuzey Gok
+// CSS 343
+// Movie Class Header
+// The movie class is the general implementation of a movie that
+// is extended on by specific movie genres. It has constructors, destructor,
+// multiple get and set functions, along with overloaded comparison operator
+// functions. It has the private fields of name, director, and year. These fields
+// are all common throughout all genres of movies.
 #ifndef MOVIE_ASS_4
 #define MOVIE_ASS_4
 #include <iostream>
@@ -31,6 +39,7 @@ public:
     virtual bool operator!=(const Movie& other) const;
 
 private:
+    // Private fields of movies
     string name;
     string director;
     int year;

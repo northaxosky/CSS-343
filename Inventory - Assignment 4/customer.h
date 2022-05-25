@@ -1,3 +1,8 @@
+// Kuzey Gok
+// CSS 343
+// Customer Class Header
+// The customer class is a class meant to store information on
+// every unique customer of the business.
 #ifndef CUSTOMER_ASS_4
 #define CUSTOMER_ASS_4
 #include "hashtable.h"
@@ -22,9 +27,11 @@ public:
     void release(Movie* movie);
 
 private:
+    // History and hashtable of borrowed movies
     vector<string> history;
     HashTable<string, int> collection;
 
+    // Customer fields - ID & name
     int id;
     string name;
 };
