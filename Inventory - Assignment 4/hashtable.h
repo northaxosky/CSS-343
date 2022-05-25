@@ -13,10 +13,10 @@ public:
     HashTable(const Key &key, const Data &data);
     ~HashTable();
 
-    void insert(const Key& key, const Val& val);
+    void insert(const Key& key, const Data& data);
     void retrieve(const Key& key);
-
-private:
+privatey
+    int hash(const Key& key, const Data &data);
     vector<Node<Key, Data>*> table;
 };
 #endif

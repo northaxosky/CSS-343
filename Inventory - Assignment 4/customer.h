@@ -24,6 +24,9 @@ public:
 private:
     vector<string> history;
     HashTable<string, int> collection;
+
+    int id;
+    string name;
 };
 
 #endif
