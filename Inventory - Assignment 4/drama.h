@@ -4,8 +4,17 @@
 #include <iostream>
 using namespace std;
 
-class Drama : Movie {
+class Drama : public Movie {
+public:
+    Drama();
+    Drama(const Drama& other);
+    Drama(const string director, const string title, const int year);
+    ~Drama();
 
+    bool operator<(const Movie& other) const;
+    bool operator>(const Movie& other) const;
+    bool operator==(const Movie& other) const;
+    bool operator!=(const Movie& other) const;
 };
 
 #endif

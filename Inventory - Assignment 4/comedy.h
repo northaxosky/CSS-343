@@ -4,9 +4,17 @@
 #include "movie.h"
 using namespace std;
 
-class Comedy : Movie {
+class Comedy : public Movie {
+    // constructor and Destructor
+    Comedy();
+    Comedy(const Comedy& other);
+    Comedy(string director, string title, int year);
+    ~Comedy();
 
-
+    bool operator<(const Movie& other) const;
+    bool operator>(const Movie& other) const;
+    bool operator==(const Movie& other) const;
+    bool operator!=(const Movie& other) const;
 };
 
 #endif
