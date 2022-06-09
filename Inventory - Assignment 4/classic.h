@@ -8,28 +8,33 @@
 #include "movie.h"
 #include <iostream>
 #include <string>
+#include <vector>
+#include <istream>
+#include <sstream>
 using namespace std;
 
 class Classic : public Movie   {
 public:
     // Constructor & Destructor
     Classic();
-    Classic(const Classic& other);
     Classic(string director, string title, string actor, int month, int year);
-    ~Classic();
 
     // Overloaded Comparison Operators
     bool operator<(const Movie& other) const;
-    bool operator>(const Movie& other) const;
     bool operator==(const Movie& other) const;
-    bool operator!=(const Movie& other) const;
 
-    // overloaded << operator
-    friend ostream& operator<<(ostream& out, const Classic& classic);
+    // setData function used by parser
+    void setInfo(istream& line);
+
+    string hash();
+    char type = 'C';
 protected:
     // Classic movies - extra month and major actor
     string actor;
     int month;
+    ostream& print(ostream& out) const;
+
+    vector<string> split(const string& s, char l);
 };
 
 #endif

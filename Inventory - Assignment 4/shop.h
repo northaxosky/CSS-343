@@ -15,21 +15,38 @@
 using namespace std;
 
 class Shop  {
+public:
     // Constructor & Destructor
     Shop();
-    ~Shop();
+    ~Shop() = default;
     
-    // add and find customers
+    // add and find customers and movies
     void addCustomer(Customer* customer);
     Customer* findCustomer(int id);
+    void addMovie(Movie* movie);
+    Movie* findMovie(string name);
+
+    // Process Transactions
+    void processInventory();
+    void processHistory(int id);
+    void processBorrow(int id, char type, string details, string command);
+    void processReturn(int id, char type, string details, string command);
+    
 
     // display information about the shop
     void display();
 
 private:
+    struct CustomerHash
+    {
+        unsigned long operator()(const int& key) const  {
+            return key % SIZE;
+        }
+    };
+    
     // Inventoy of the shop, Hash table of customers
-    Inventory main;
-    HashTable<int, Customer*> customers;
+    Inventory inventory;
+    HashTable<int, Customer*, CustomerHash> customers;
 };
 
 #endif

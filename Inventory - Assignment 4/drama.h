@@ -13,15 +13,18 @@ class Drama : public Movie {
 public:
     // Constructors and Destructor
     Drama();
-    Drama(const Drama& other);
     Drama(const string director, const string title, const int year);
-    ~Drama();
 
     // Overloaded comparison operators
     bool operator<(const Movie& other) const;
-    bool operator>(const Movie& other) const;
-    bool operator==(const Movie& other) const;
-    bool operator!=(const Movie& other) const;
+
+    // setData function used by parser
+    void setInfo(istream& line);
+
+    string hash();
+    char type = 'D';
+protected:
+    ostream& print(ostream& out) const;
 };
 
 #endif

@@ -11,30 +11,35 @@
 using namespace std;
 
 class Customer  {
+    friend ostream& operator<<(ostream& out, const Customer& cust);
 public:
     // Constructor & Destructors
     Customer();
-    Customer(int id, string name);
+    Customer(string first, string last, int id);
     ~Customer();
 
     // get and Set methods
-    int getID() const;
-    string getName() const;
+    int getID() const { return id; }
+    string getName() const {return first + " " + last; };
     void getHistory() const;
     void addHistory(string hist);
 
     // borrow and return
     void borrow(Movie* movie);
-    void release(Movie* movie);
+    bool release(Movie* movie);
+
+    bool setInfo(istream& line);
+
 
 private:
     // History and hashtable of borrowed movies
     vector<string> history;
-    HashTable<string, int> collection;
+    HashTable<string, int, MovieHash> collection;
 
     // Customer fields - ID & name
     int id;
-    string name;
+    string first;
+    string last;
 };
 
 #endif

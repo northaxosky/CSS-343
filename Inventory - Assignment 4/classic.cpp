@@ -6,18 +6,9 @@
 #include "classic.h"
 
 // Constructor
-Classic::Classic()  {
+Classic::Classic() : Movie() {
     actor = "";
     month = 0;
-}
-
-// Copy Constructor
-Classic::Classic(const Classic& other)  {
-    this->director = other.director;
-    this->title = other.title;
-    this->actor = other.actor;
-    this->month = other.month;
-    this->year = other.year;
 }
 
 //Constructor given all variables
@@ -29,10 +20,67 @@ Classic::Classic(string director, string title, string actor, int month, int yea
     this->year = year;
 }
 
-// Overloaded outstream operator
-ostream& operator<<(ostream& out, const Classic& classic) {
-    cout << "Name: " << classic.title << endl; 
-    cout << "Director: " << classic.director << endl;
-    cout << "Major Actor: " << classic.actor << endl;
-    cout << "Release Date: " << classic.month << " " << classic.year << endl;
+string Classic::hash() {
+    if (hashKey.length() == 0)  {
+        hashKey = to_string(month) + " " + to_string(year) + " " + actor;
+    }
+    return hashKey;
 }
+
+void Classic::setInfo(istream& line) {
+    Movie::setInfo(line);
+    string temp;
+    getline(line, temp);
+    vector<string> components = split(temp, ' ');
+    actor = components[0] + " " + components[1];
+    month = stoi(components[2]);
+    year = stoi(components[3]);
+}
+
+vector<string> Classic::split(const string& s, char l)  {
+    vector<string> tokens;
+    string token;
+    istringstream tokenStream(s);
+    while (getline(tokenStream, token, l))
+        tokens.push_back(token);
+    return tokens;
+}
+
+// overloaded operators
+bool Classic::operator<(const Movie& other) const  {
+    bool comparison = Movie::operator<(other);
+    try {
+        const Classic& c = static_cast<const Classic&>(other);
+        return (
+            comparison &&
+            year < c.year &&
+            actor < c.actor &&
+            month < c.month
+        );
+    } catch (const bad_cast&e)  {
+        return comparison;
+    }
+    return false;
+}
+
+
+bool Classic::operator==(const Movie& other) const  {
+    bool comparison = Movie::operator==(other);
+    try {
+        const Classic& c = static_cast<const Classic&>(other);
+        return (
+            comparison &&
+            actor == c.actor
+        );
+    }   catch (const bad_cast& e)   {
+            return comparison;
+    }
+    return comparison;
+}
+
+ostream& Classic::print(ostream& out) const{
+    Movie::print(out);
+    out << ", " << actor << ", " << month << " " << year;
+    return out;
+}
+

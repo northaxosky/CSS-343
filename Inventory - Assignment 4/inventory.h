@@ -9,7 +9,10 @@
 #include "hashtable.h"
 #include <vector>
 
+const int MAX = 5;
+
 class Inventory {
+    friend ostream& operator<<(ostream& out,const Inventory& inv);
 public:
     // Constructor and Destructor
     Inventory();
@@ -17,11 +20,17 @@ public:
 
     // add and find movie functions
     void add(Movie* movie);
-    Movie* find(string);
+    Movie* find(string key);
 
 private:
+    void insert(Movie* movie);
+    int idx(Movie* movie);
+    ostream& print(ostream& out) const;
     // Hash Table to keep track of movies
-    HashTable<string, Movie*> movies;
+    HashTable<string, Movie*, MovieHash> movies;
+    int sort[MAX];
+    Movie* sortedMovies[MAX][100];
+    int typeMovies;
 };
 
 #endif

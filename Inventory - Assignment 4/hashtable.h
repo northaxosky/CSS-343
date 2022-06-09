@@ -17,7 +17,9 @@ class HashTable {
 public:
     // Constructors and Destructor
     HashTable() {
-        table = new vector<Node<Key, Data>*>(SIZE);
+        for (unsigned int i = 0; i < SIZE; i++) {
+            table[i] = nullptr;
+        }
     }
 
     ~HashTable()    {
@@ -34,7 +36,7 @@ public:
 
     // Constant time insert and retrieval
     void insert(const Key& key, const Data& data)   {
-        int idx = func(k);
+        int idx = func(key);
         Node<Key, Data>* prev = nullptr;
         Node<Key, Data>* curr = table[idx];
 
@@ -49,25 +51,27 @@ public:
         }
 
         if (!curr)  {
-            curr = new Node<Key, Data>*(key, data);
+            curr = new Node<Key, Data>(key, data);
 
             if (!prev)
                 table[idx] = curr;
             else
-                prev->next = item;
+                prev->next = curr;
         }
     }
 
-    Data& retrieve(const Key& key)   {
+    bool retrieve(const Key& key, Data& data)   {
         int idx = func(key);
         Node<Key, Data>* curr = table[idx];
 
         while (curr)    {
-            if (curr->key == key)   
-                return curr->data;
+            if (curr->key == key)   {
+                data = curr->data;
+                return true;
+            }
             curr = curr->next;
         }
-        return NULL;
+        return false;
     }
 
     // Remove item from table

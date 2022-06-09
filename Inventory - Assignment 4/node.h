@@ -33,9 +33,13 @@ public:
     // change the data of the obj
     bool setData(Data& data)    {
         this->data = data;
+        return true;
     }
 
-private:
+    Key getKey() const { return key; }
+    Key getData() const { return data; }
+    void setData(Data d) { data = d; }
+
     // private fields
     Key key;
     Data data;

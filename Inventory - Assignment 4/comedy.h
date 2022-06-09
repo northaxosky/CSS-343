@@ -10,17 +10,21 @@
 using namespace std;
 
 class Comedy : public Movie {
+public:
     // constructor and Destructor
     Comedy();
-    Comedy(const Comedy& other);
     Comedy(const string director, const string title, int year);
-    ~Comedy();
 
-    // Overloaded Comparison operators
+    // Overloaded Comparison operator
     bool operator<(const Movie& other) const;
-    bool operator>(const Movie& other) const;
-    bool operator==(const Movie& other) const;
-    bool operator!=(const Movie& other) const;
+
+    // setData function used by parser
+    void setInfo(istream& line);
+
+    string hash();
+    char type = 'F';
+protected:
+    ostream& print(ostream& out) const;
 };
 
 #endif
