@@ -13,7 +13,7 @@ class Comedy : public Movie {
     // constructor and Destructor
     Comedy();
     Comedy(const Comedy& other);
-    Comedy(string director, string title, int year);
+    Comedy(const string director, const string title, int year);
     ~Comedy();
 
     // Overloaded Comparison operators

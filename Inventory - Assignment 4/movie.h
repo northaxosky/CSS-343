@@ -18,7 +18,7 @@ public:
     // Constructor and Destructors
     Movie();
     Movie(const Movie& other);
-    Movie(string& name, string& director, int year);
+    Movie(const string& name, const string& director, int year);
     virtual ~Movie();
 
     // Get functions

@@ -1,0 +1,14 @@
+DONE:
+    - Node
+    - HashTable
+PARTIAL DONE:
+    - Classic
+    - Comedy
+    - Drama
+
+TODO:
+    - Movie
+    - Customer
+    - Inventory
+    - Shop
+    - Parser

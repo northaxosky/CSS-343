@@ -12,7 +12,7 @@
 
 using namespace std;
 
-template <typename Key, typename Data, typename func = Hash<Key>>
+template <typename Key, typename Data, typename Function = Hash<Key>>
 class HashTable {
 public:
     // Constructors and Destructor
@@ -89,7 +89,8 @@ public:
 
 private:
     // Hash function for insertion
-    int hash(const Key& key, const Data &data);
+    Function func;
+    
     // vector of nodes table used for open hashing
     vector<Node<Key, Data>*> table;
 };
