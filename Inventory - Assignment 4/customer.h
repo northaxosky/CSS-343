@@ -7,6 +7,7 @@
 #define CUSTOMER_ASS_4
 #include "hashtable.h"
 #include <string>
+#include <vector>
 using namespace std;
 
 class Customer  {
