@@ -1,7 +1,5 @@
 #include "shop.h"
 
-Shop::Shop()    {}
-
 void Shop::addMovie(Movie* movie)   {
     inventory.add(movie);
 }

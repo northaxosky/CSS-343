@@ -5,6 +5,7 @@
 // next node that will be used as data storage in the Hash Table.
 #ifndef NODE_ASS_4
 #define NODE_ASS_4
+#include <cstddef>
 
 const int SIZE = 100;
 

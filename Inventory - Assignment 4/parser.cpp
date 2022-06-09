@@ -4,7 +4,6 @@
 // The parser class is used to parse the input files given
 // and act accordingly for the business.
 #include "parser.h"
-Parser::Parser()    {}
 
 // parse the movies from the given file and add to shop
 void Parser::parseInventory(string name)   {
