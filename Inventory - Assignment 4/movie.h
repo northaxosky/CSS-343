@@ -38,10 +38,12 @@ public:
     virtual bool operator==(const Movie& other) const;
     virtual bool operator!=(const Movie& other) const;
 
-private:
+    virtual friend ostream& operator<<(ostream& out, const Movie& mov);
+
+protected:
     // Private fields of movies
-    string name;
     string director;
+    string title;
     int year;
 };
 

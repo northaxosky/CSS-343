@@ -6,22 +6,48 @@
 #ifndef NODE_ASS_4
 #define NODE_ASS_4
 
+const int SIZE = 100;
+
 template<typename Key, typename Data>
 class Node  {
 public:
     // Constructors and destructor
-    Node();
-    Node(const Node& other);
-    Node(const Key& key, const Data& data);
-    ~Node();
+    Node()  {
+        key = NULL;
+        data = NULL;
+        next= nullptr;
+    }
+
+    Node(const Node& other) {
+        key = other.key;
+        data = other.data;
+        next = other.next;
+    }
+
+    Node(const Key& key, const Data& data)  {
+        this->key = key;
+        this->data = data;
+        this->next = nullptr;
+    }
 
     // change the data of the obj
-    bool setData(Data& data);
+    bool setData(Data& data)    {
+        this->data = data;
+    }
+
 private:
     // private fields
     Key key;
     Data data;
     Node* next;
+};
+
+// struct for hashing
+template <typename Key>
+struct Hash  {
+    int operator()(const Key& key) const  {
+        return reinterpret_cast<int>(key) % SIZE;
+    }
 };
 
 #endif

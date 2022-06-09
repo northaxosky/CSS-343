@@ -23,7 +23,10 @@ public:
     bool operator>(const Movie& other) const;
     bool operator==(const Movie& other) const;
     bool operator!=(const Movie& other) const;
-private:
+
+    // overloaded << operator
+    friend ostream& operator<<(ostream& out, const Classic& classic);
+protected:
     // Classic movies - extra month and major actor
     string actor;
     int month;
